@@ -1,0 +1,15 @@
+// $bg-color-base:#F8FAFC;
+
+$bg-color-base:#F8FAFC;
+
+html {
+  width: 100%;
+  background-color: #ffffff; /* 1200pxの外側を白（または別の色）にする */
+}
+
+body {
+  width: 100%;
+  // max-width: 1200px; /* PCでの最大幅 */
+  margin: 0 auto;     /* 画面の中央に配置 */
+  background-color: $bg-color-base;
+}
