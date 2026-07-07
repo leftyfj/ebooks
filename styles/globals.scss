@@ -1,6 +1,4 @@
-// $bg-color-base:#F8FAFC;
-
-$bg-color-base:#F8FAFC;
+@use "./variables" as *;
 
 html {
   width: 100%;
@@ -13,3 +11,5 @@ body {
   margin: 0 auto;     /* 画面の中央に配置 */
   background-color: $bg-color-base;
 }
+
+

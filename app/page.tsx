@@ -2,21 +2,52 @@
 import '@/styles/globals.scss';
 import '@/styles/top.scss';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import { GoogleLoginButton } from '@/components/GoogleLoginButton';
+import { LogoutButton } from '@/components/LogoutButton';
+// import { Header } from '@/components/Header';
 export default function Home() {
+    const [user, setUser] = useState(null);
+     useEffect(() => {
+         const checkUser = async () => {
+             const {
+                 data: { user }
+             } = await supabase.auth.getUser();
+
+             console.log(user);
+             setUser(user);
+         };
+
+         checkUser();
+     }, []);
+
+     const handleLogout = async () => {
+         await supabase.auth.signOut();
+         setUser(null);
+     };
     return (
         <>
+        {/* <Header user={user} /> */}
             <header className="header">
                 <div className="header__logo ">
                     <AutoStoriesIcon fontSize="large" />
                     <span className="header__logo-main">eBooks</span>
                     <span className="header__logo-sub">Library Manager</span>
                 </div>
-                <div className="header__login login-test">
-                    <a href="">Googleでログイン</a>
-                </div>
+                {user ? (
+                    <div className="header__isLogin">
+                        <p className="isLogin">
+                            {user.user_metadata.name} さんログイン中
+                        </p>
+                        <LogoutButton onLogout={handleLogout} />
+                    </div>
+                ) : (
+                    <GoogleLoginButton bgcolor="transparent" />
+                )}
             </header>
             <main className="main">
                 <div className="hero">
@@ -29,6 +60,9 @@ export default function Home() {
                             <br />
                             複数サービスの電子書籍をまとめて管理できます。
                         </p>
+                        <div className="hero__login-button-area">
+                            {!user && <GoogleLoginButton bgcolor="black" />}
+                        </div>
                     </div>
                     <Image
                         className="hero__image"
@@ -50,8 +84,9 @@ export default function Home() {
                                     <Image
                                         src="/books.jpg"
                                         alt=""
-                                        width={300}
-                                        height={250}
+                                        // width={300}
+                                        // height={250}
+                                        fill
                                         className="card__image"
                                     />
                                 </div>
@@ -65,8 +100,9 @@ export default function Home() {
                                     <Image
                                         src="/tags.jpg"
                                         alt=""
-                                        width={300}
-                                        height={250}
+                                        // width={300}
+                                        // height={250}
+                                        fill
                                         className="card__image"
                                     />
                                 </div>
@@ -80,8 +116,9 @@ export default function Home() {
                                     <Image
                                         src="/bookstore.jpg"
                                         alt=""
-                                        width={300}
-                                        height={250}
+                                        // width={300}
+                                        // height={250}
+                                        fill
                                         className="card__image"
                                     />
                                 </div>
@@ -95,8 +132,9 @@ export default function Home() {
                                     <Image
                                         src="/search.jpg"
                                         alt=""
-                                        width={300}
-                                        height={250}
+                                        // width={300}
+                                        // height={250}
+                                        fill
                                         className="card__image"
                                     />
                                 </div>
