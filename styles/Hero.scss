@@ -1,0 +1,64 @@
+@use "./variables" as *;
+.hero {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  /* 黒を40%重ねる */
+  z-index: 1;
+  }
+}
+
+.hero__login-button-area {
+  margin-top: 2rem;
+}
+.hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero__inner {
+  position: relative;
+  width: 80%;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    background: rgba(0,0,0,.35);
+    padding: 40px 60px;
+    border-radius: 20px;
+
+}
+
+.hero__title {
+ font-size: 3rem;
+
+ & span {
+  display: block;
+  text-align: center;
+  font-size: 42px;
+ }
+}
+
+.hero__message {
+ margin-top: 18px;
+ font-size: 20px;
+}
+
+.hero__title,
+.hero__message {
+   color: $text-color;
+   text-shadow: $text-shadow;
+}
